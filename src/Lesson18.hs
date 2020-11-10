@@ -1,5 +1,7 @@
 module Lesson18 where
 
+import qualified Data.Map as Map
+
 data Box a = Box a deriving (Show)
 
 wrap :: a -> Box a
@@ -35,6 +37,7 @@ toList (Triple a b c) = [a, b, c]
 transform :: (a -> a) -> Triple a -> Triple a
 transform f (Triple a b c ) = Triple (f a) (f b) (f c)
 
+-- list impl in Haskell (GHCI> :info [])
 -- data [] a = [] | a:[a]
 
 data List a = Empty | Cons a (List a) deriving Show
@@ -42,3 +45,29 @@ data List a = Empty | Cons a (List a) deriving Show
 ourMap :: (a -> b) -> List a -> List b
 ourMap _ Empty = Empty
 ourMap f (Cons head tail) = Cons (f head) (ourMap f tail)
+
+
+-- tuple impl in Haskell (GHCi> :info (,))
+-- data (,) a b = (,) a b
+
+-- Kinds: types of types
+-- The kind of a type indicates number of params the type takes
+-- No params: *
+-- One param: * -> *
+-- Two params: * -> * -> *
+
+data OrganName = Heart | Brain | Kidney | Spleen deriving (Show, Eq)
+
+data Organ = Organ
+  {
+    key :: Int,
+    name:: OrganName
+  }
+
+
+boxMap:: (a -> b) -> Box a -> Box b
+boxMap f (Box a) = Box (f a)
+
+tripleMap :: (a -> b) -> Triple a -> Triple b
+tripleMap f (Triple a b c) = Triple (f a) (f b) (f c)
+

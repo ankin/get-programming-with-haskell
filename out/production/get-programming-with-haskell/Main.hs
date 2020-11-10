@@ -1,19 +1,32 @@
 module Main where
 
-import Lesson12
 import Lesson10
-import Lesson15
+import Lesson12
 import Lesson14
+import Lesson15
 import Lesson16
 import Lesson17
 import Lesson18
 
+import qualified Data.Map as Map
+
 main :: IO ()
 main = do
+  -- Lesson 18
 
--- Lesson 18
+  let organs = [Heart, Heart, Brain, Spleen, Spleen, Kidney]
+  let ids = [2, 7, 13, 14, 21, 24]
 
-  print (transform (+1) aPoint)
+  let organPairs = zip ids organs
+  let organCatalog = Map.fromList organPairs
+
+  print (organCatalog)
+  print (Map.lookup 7 organCatalog)
+
+  let list = Cons 1 (Cons 2 (Cons 3 Empty))
+  print (ourMap (* 2) list)
+
+  print (transform (+ 1) aPoint)
 
   let n = 9
   print (Box n)
@@ -35,17 +48,16 @@ main = do
 
 --  print (myAny even [1..5])
 
-
-  -- Capstone cipher
-  --  print (rotN 4 L4)
-  --  print (fourLetterAlphabetEncoder [L2, L3, L4, L1])
-  --  print (fourLetterAlphabetEncoder [L4, L1, L2, L3])
-  --  print (fourLetterAlphabetEncoder [L2, L3, L4, L1] == [L4, L1, L2, L3])
-  --
-  --  print (rotEncoder "Jean-Paul likes Simone")
-  --  print (rotDecoder "\557130\557157\557153\557166\557101\557136\557153\557173\557164\557088\557164\557161\557163\557157\557171\557088\557139\557161\557165\557167\557166\557157")
-  --
-  --  print (maxBits)
+-- Capstone cipher
+--  print (rotN 4 L4)
+--  print (fourLetterAlphabetEncoder [L2, L3, L4, L1])
+--  print (fourLetterAlphabetEncoder [L4, L1, L2, L3])
+--  print (fourLetterAlphabetEncoder [L2, L3, L4, L1] == [L4, L1, L2, L3])
+--
+--  print (rotEncoder "Jean-Paul likes Simone")
+--  print (rotDecoder "\557130\557157\557153\557166\557101\557136\557153\557173\557164\557088\557164\557161\557163\557157\557171\557088\557139\557161\557165\557167\557166\557157")
+--
+--  print (maxBits)
 
 --  print (intToBits' 2)
 --  print (intToBits' 8)
@@ -140,17 +152,3 @@ main = do
 
 --  let inFirstHalf e aList = elem e (take ((length aList) `div` 2) aList)
 --  print (inFirstHalf 2 [1 .. 10])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
