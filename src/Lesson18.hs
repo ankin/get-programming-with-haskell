@@ -56,7 +56,7 @@ ourMap f (Cons head tail) = Cons (f head) (ourMap f tail)
 -- One param: * -> *
 -- Two params: * -> * -> *
 
-data OrganName = Heart | Brain | Kidney | Spleen deriving (Show, Eq)
+data OrganName = Heart | Brain | Kidney | Spleen deriving (Show, Eq, Ord)
 
 data Organ = Organ
   {

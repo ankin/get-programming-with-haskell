@@ -1,38 +1,38 @@
 module Main where
 
-import Lesson10
-import Lesson12
-import Lesson14
-import Lesson15
-import Lesson16
-import Lesson17
-import Lesson18
-
 import qualified Data.Map as Map
+import Lesson19
 
 main :: IO ()
 main = do
-  -- Lesson 18
+  -- Lesson 19
+  print (countOrgan Brain availableOrgans)
+  print (filter isSomething availableOrgans)
 
-  let organs = [Heart, Heart, Brain, Spleen, Spleen, Kidney]
-  let ids = [2, 7, 13, 14, 21, 24]
+  -- print (report (process Brain))
 
-  let organPairs = zip ids organs
-  let organCatalog = Map.fromList organPairs
+  print (processRequest 14 organCatalog)
 
-  print (organCatalog)
-  print (Map.lookup 7 organCatalog)
+-- Lesson 18
 
-  let list = Cons 1 (Cons 2 (Cons 3 Empty))
-  print (ourMap (* 2) list)
-
-  print (transform (+ 1) aPoint)
-
-  let n = 9
-  print (Box n)
-
-  let word = "box"
-  print (Box word)
+--  let organs = [Organ { key = 7, name = Heart }, Organ {key = 14, name = Spleen }]
+--
+--  let organCatalog = Map.fromList (map (\(Organ key name) -> (name, key)) organs)
+--
+--  print (organCatalog)
+--  print (Map.lookup Heart organCatalog)
+--  print (Map.lookup Kidney organCatalog)
+--
+--  let list = Cons 1 (Cons 2 (Cons 3 Empty))
+--  print (ourMap (* 2) list)
+--
+--  print (transform (+ 1) aPoint)
+--
+--  let n = 9
+--  print (Box n)
+--
+--  let word = "box"
+--  print (Box word)
 
 -- Lesson 17
 --  print (mconcat [Green, Yellow, Blue])

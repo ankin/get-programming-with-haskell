@@ -56,4 +56,18 @@ ourMap f (Cons head tail) = Cons (f head) (ourMap f tail)
 -- One param: * -> *
 -- Two params: * -> * -> *
 
-data Organ = Heart | Brain | Kidney | Spleen deriving (Show, Eq)
+data OrganName = Heart | Brain | Kidney | Spleen deriving (Show, Eq, Ord)
+
+data Organ = Organ
+  {
+    key :: Int,
+    name:: OrganName
+  }
+
+
+boxMap:: (a -> b) -> Box a -> Box b
+boxMap f (Box a) = Box (f a)
+
+tripleMap :: (a -> b) -> Triple a -> Triple b
+tripleMap f (Triple a b c) = Triple (f a) (f b) (f c)
+

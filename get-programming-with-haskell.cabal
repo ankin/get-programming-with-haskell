@@ -9,8 +9,8 @@ cabal-version: 1.12
 name:           get-programming-with-haskell
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/Github username here/get-programming-with-haskell#readme>
-homepage:       https://github.com/Github username here/get-programming-with-haskell#readme
-bug-reports:    https://github.com/Github username here/get-programming-with-haskell/issues
+homepage:       https://github.com/ankin/get-programming-with-haskell#readme
+bug-reports:    https://github.com/ankin/get-programming-with-haskell/issues
 author:         Author name here
 maintainer:     Author email here
 copyright:      2019 Author name here
@@ -35,6 +35,7 @@ library
       Lesson16
       Lesson17
       Lesson18
+      Lesson19
       Lesson4
       Lesson5
       Lesson7
