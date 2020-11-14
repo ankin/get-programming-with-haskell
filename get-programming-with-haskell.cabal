@@ -27,7 +27,8 @@ source-repository head
 
 library
   exposed-modules:
-      Lesson10
+      Capstone10
+      Capstone20
       Lesson12
       Lesson13
       Lesson14

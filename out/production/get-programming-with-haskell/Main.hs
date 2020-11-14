@@ -1,19 +1,24 @@
 module Main where
 
 import qualified Data.Map as Map
-import Lesson19
+import Capstone20
 
 main :: IO ()
 main = do
-  -- Lesson 19
-  print (countOrgan Brain availableOrgans)
-  print (filter isSomething availableOrgans)
 
-  -- print (report (process Brain))
-
-  print (processRequest 14 organCatalog)
+  -- Capstone 20
   
-  print (emptyDrawers availableOrgans)
+  print (fileToTS file1)
+  
+  -- Lesson 19
+--  print (countOrgan Brain availableOrgans)
+--  print (filter isSomething availableOrgans)
+--
+--  -- print (report (process Brain))
+--
+--  print (processRequest 14 organCatalog)
+--  
+--  print (emptyDrawers availableOrgans)
 
 -- Lesson 18
 

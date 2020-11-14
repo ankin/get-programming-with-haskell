@@ -74,5 +74,8 @@ processRequest id catalog = processAndReport (Map.lookup id catalog)
 
 emptyDrawers :: [Maybe Organ] -> Int
 emptyDrawers mOrgans = length (filter isNothing mOrgans)
-
 -- emptyDrawers mOrgans = length (filter (not . isSomething) mOrgans)
+
+maybeMap :: (a -> b) -> Maybe a -> Maybe b
+maybeMap func (Just a)= Just (func a)
+maybeMap _ Nothing = Nothing

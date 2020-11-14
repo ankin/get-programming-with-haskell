@@ -1,4 +1,4 @@
-module Lesson10 where
+module Capstone10 where
 
 cup flOz = \_ -> flOz
 cup flOz = \message -> message flOz
