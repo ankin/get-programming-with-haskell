@@ -1,6 +1,7 @@
 module Lesson19 where
 
 import qualified Data.Map as Map
+import Data.Maybe (isNothing)
 
 data Organ = Heart | Brain | Kidney | Spleen deriving (Show, Eq)
 
@@ -70,3 +71,8 @@ processAndReport organ = report (process organ)
 
 processRequest :: Int -> Map.Map Int Organ -> String
 processRequest id catalog = processAndReport (Map.lookup id catalog)
+
+emptyDrawers :: [Maybe Organ] -> Int
+emptyDrawers mOrgans = length (filter isNothing mOrgans)
+
+-- emptyDrawers mOrgans = length (filter (not . isSomething) mOrgans)

@@ -12,6 +12,8 @@ main = do
   -- print (report (process Brain))
 
   print (processRequest 14 organCatalog)
+  
+  print (emptyDrawers availableOrgans)
 
 -- Lesson 18
 
@@ -115,6 +117,7 @@ main = do
 --
 --  print (reverse3 [1..5])
 --
+
 --  print (reverse2 [1,2,3])
 --
 --  print (collatz 23)
