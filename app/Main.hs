@@ -7,9 +7,11 @@ main :: IO ()
 main = do
 
   -- Capstone 20
-  
-  print (fileToTS file1)
-  
+
+  let ts1 = fileToTS file1
+  let ts2 = fileToTS file2
+  print (ts1 <> ts2)
+
   -- Lesson 19
 --  print (countOrgan Brain availableOrgans)
 --  print (filter isSomething availableOrgans)
@@ -17,7 +19,7 @@ main = do
 --  -- print (report (process Brain))
 --
 --  print (processRequest 14 organCatalog)
---  
+--
 --  print (emptyDrawers availableOrgans)
 
 -- Lesson 18
