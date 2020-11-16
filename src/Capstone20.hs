@@ -103,11 +103,33 @@ combineTS :: TS a -> TS a -> TS a
 combineTS (TS [] []) ts2 = ts2
 combineTS ts1 (TS [] []) = ts1
 combineTS (TS t1 v1) (TS t2 v2) = TS completeTimes combinedValues
-  where bothTimes = mconcat [t1, t2]
-        completeTimes = [minimum bothTimes.. maximum bothTimes]
-        tvMap = foldl insertMaybePair Map.empty (zip t1 v1)
-        updatedMap = foldl insertMaybePair tvMap (zip t2 v2)
-        combinedValues = map (\k -> Map.lookup k updatedMap) completeTimes
+  where
+    bothTimes = mconcat [t1, t2]
+    completeTimes = [minimum bothTimes .. maximum bothTimes]
+    tvMap = foldl insertMaybePair Map.empty (zip t1 v1)
+    updatedMap = foldl insertMaybePair tvMap (zip t2 v2)
+    combinedValues = map (\k -> Map.lookup k updatedMap) completeTimes
 
 instance Semigroup (TS a) where
   (<>) = combineTS
+
+instance Monoid (TS a) where
+  mappend = (<>)
+  mempty = TS [] []
+
+mean :: (Real a) => [a] -> Double
+mean xs = total / count
+  where
+    total = realToFrac (sum xs)
+    count = (realToFrac . length) xs -- another way of composing functions
+
+meanTS :: (Real a) => TS a -> Maybe Double
+meanTS (TS _ []) = Nothing
+meanTS (TS _ values) =
+  if all (== Nothing) values
+    then Nothing
+    else Just avg
+  where
+    justVals = filter isJust values
+    cleanVals = map fromJust justVals
+    avg = mean cleanVals

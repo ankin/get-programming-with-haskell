@@ -1,18 +1,21 @@
 module Main where
 
-import qualified Data.Map as Map
 import Capstone20
+import qualified Data.Map as Map
 
 main :: IO ()
 main = do
-
   -- Capstone 20
 
   let ts1 = fileToTS file1
   let ts2 = fileToTS file2
-  print (ts1 <> ts2)
+  let ts3 = fileToTS file3
+  let ts4 = fileToTS file4
+  let allTs = mconcat [ts1, ts2, ts3, ts4]
+  print (meanTS ts4)
+  print (meanTS allTs)
 
-  -- Lesson 19
+-- Lesson 19
 --  print (countOrgan Brain availableOrgans)
 --  print (filter isSomething availableOrgans)
 --
