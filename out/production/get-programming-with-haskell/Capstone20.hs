@@ -57,6 +57,7 @@ file4 =
     (36, 220.6)
   ]
 
+
 data TS a = TS [Int] [Maybe a]
 
 createTS :: [Int] -> [a] -> TS a
@@ -133,3 +134,36 @@ meanTS (TS _ values) =
     justVals = filter isJust values
     cleanVals = map fromJust justVals
     avg = mean cleanVals
+
+type CompareFunc a = a -> a -> a
+
+type TSCompareFunc a = (Int, Maybe a) -> (Int, Maybe a) -> (Int, Maybe a)
+
+makeTSCompare :: Eq a => CompareFunc a -> TSCompareFunc a
+makeTSCompare func = newFunc
+  where
+    newFunc (i1, Nothing) (i2, Nothing) = (i1, Nothing)
+    newFunc (_, Nothing) (i, val) = (i, val)
+    newFunc (i, val) (_, Nothing) = (i, val)
+    newFunc (i1, Just val1) (l2, Just val2) =
+      if func val1 val2 == val1
+        then (i1, Just val1)
+        else (l2, Just val2)
+
+compareTS :: Eq a => (a -> a -> a) -> TS a -> Maybe (Int, Maybe a)
+compareTS _ (TS [] []) = Nothing
+compareTS func (TS times values) =
+  if all (== Nothing) values
+    then Nothing
+    else Just best
+  where
+    pairs = zip times values
+    best = foldl (makeTSCompare func) (0, Nothing) pairs
+
+minTS :: Ord a => TS a -> Maybe (Int, Maybe a)
+minTS = compareTS min
+
+maxTS :: Ord a => TS a -> Maybe (Int, Maybe a)
+maxTS = compareTS max
+
+

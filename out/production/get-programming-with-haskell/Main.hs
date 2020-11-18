@@ -11,9 +11,15 @@ main = do
   let ts2 = fileToTS file2
   let ts3 = fileToTS file3
   let ts4 = fileToTS file4
+  
   let allTs = mconcat [ts1, ts2, ts3, ts4]
-  print (meanTS ts4)
+
   print (meanTS allTs)
+
+  print (makeTSCompare max (3, Just 200) (4, Just 10))
+
+ 
+  print (maxTS allTs)
 
 -- Lesson 19
 --  print (countOrgan Brain availableOrgans)
