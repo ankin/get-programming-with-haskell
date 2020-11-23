@@ -57,7 +57,6 @@ file4 =
     (36, 220.6)
   ]
 
-
 data TS a = TS [Int] [Maybe a]
 
 createTS :: [Int] -> [a] -> TS a
@@ -166,4 +165,42 @@ minTS = compareTS min
 maxTS :: Ord a => TS a -> Maybe (Int, Maybe a)
 maxTS = compareTS max
 
+diffPair :: Num a => Maybe a -> Maybe a -> Maybe a
+diffPair Nothing _ = Nothing
+diffPair _ Nothing = Nothing
+diffPair (Just x) (Just y) = Just (x - y)
 
+diffTS :: Num a => TS a -> TS a
+diffTS (TS times values) = TS times (Nothing : diffValues)
+  where
+    shiftValues = tail values
+    diffValues = zipWith diffPair shiftValues values
+
+--myMean :: (Real a) => [a] => Double
+--myMean n list = sum list / n
+
+meanMaybe :: (Real a) => [Maybe a] -> Maybe Double
+meanMaybe values =
+  if any (== Nothing) values
+    then Nothing
+    else (Just avg)
+  where
+    avg = mean (map fromJust values)
+
+movingAvg :: (Real a) => [Maybe a] -> Int -> [Maybe Double]
+movingAvg [] _ = []
+movingAvg values n =
+  if length nextVals == n
+    then meanMaybe nextVals : movingAvg restVals n
+    else []
+  where
+    nextVals = take n values
+    restVals = tail values
+
+movingAvarageTS :: (Real a) => TS a -> Int -> TS Double
+movingAvarageTS (TS [] []) n = TS [] []
+movingAvarageTS (TS times values) n = TS times avgValues
+  where
+    ma = movingAvg values n
+    nothings = replicate (n `div` 2) Nothing
+    avgValues = mconcat [nothings, ma, nothings]

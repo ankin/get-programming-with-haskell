@@ -14,12 +14,9 @@ main = do
   
   let allTs = mconcat [ts1, ts2, ts3, ts4]
 
-  print (meanTS allTs)
-
-  print (makeTSCompare max (3, Just 200) (4, Just 10))
-
- 
-  print (maxTS allTs)
+  print (allTs)
+  print ("Smooth:")
+  print (movingAvarageTS allTs 2)
 
 -- Lesson 19
 --  print (countOrgan Brain availableOrgans)
