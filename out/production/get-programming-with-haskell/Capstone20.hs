@@ -204,3 +204,6 @@ movingAvarageTS (TS times values) n = TS times avgValues
     ma = movingAvg values n
     nothings = replicate (n `div` 2) Nothing
     avgValues = mconcat [nothings, ma, nothings]
+    
+    
+

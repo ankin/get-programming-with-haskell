@@ -18,6 +18,10 @@ main = do
   print ("Smooth:")
   print (movingAvarageTS allTs 2)
 
+  cost1 <- getLine
+  putStrLn("cost:" ++ cost1)
+
+
 -- Lesson 19
 --  print (countOrgan Brain availableOrgans)
 --  print (filter isSomething availableOrgans)
