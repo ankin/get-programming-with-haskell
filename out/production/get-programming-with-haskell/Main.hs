@@ -1,26 +1,27 @@
 module Main where
 
-import Capstone20
-import qualified Data.Map as Map
+import Control.Monad
+import System.Environment
+import Lesson22
 
 main :: IO ()
 main = do
-  -- Capstone 20
+--  args <- getArgs
+--  let linesToRead =
+--        if length args > 0
+--          then read (head args)
+--          else 0 :: Int
+--  numbers <- myReplicateM linesToRead getLine
+--  let ints = map read numbers :: [Int]
+--
+--  print (sum ints)
 
-  let ts1 = fileToTS file1
-  let ts2 = fileToTS file2
-  let ts3 = fileToTS file3
-  let ts4 = fileToTS file4
-  
-  let allTs = mconcat [ts1, ts2, ts3, ts4]
 
-  print (allTs)
-  print ("Smooth:")
-  print (movingAvarageTS allTs 2)
-
-  cost1 <- getLine
-  putStrLn("cost:" ++ cost1)
-
+    userInput <- getContents
+    let reversed = reverse userInput
+    print reversed
+    
+-- mapM_ putStrLn args
 
 -- Lesson 19
 --  print (countOrgan Brain availableOrgans)
