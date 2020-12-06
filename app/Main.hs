@@ -24,35 +24,17 @@ main = do
 --    print reversed
 
 
-  handle <- openFile "/Users/akinash/tmp/aoc/1.txt" ReadMode
-  contents <- hGetContents handle
+-- # Advent of Code
+  -- processFile "/Users/akinash/tmp/aoc/2.txt"
+  validateFile "/Users/akinash/tmp/aoc/2.txt"
 
 
-  let maybeNumbers = stringToNumbers contents
-  let numbers = takeValues maybeNumbers
- -- #1
-  let pairs = findPairs numbers
-  --print pairs
-
-  let filteredPairs = filter (\(x, y) -> x + y == 2020) pairs
-
-  print "Matching pairs"
-  print filteredPairs
-
-  let multipliedTuples = map (\(x, y) -> x * y) filteredPairs
-  print "Max product for tuples"
-  print (maximum multipliedTuples)
 
 
-  -- #2
-  let triples = findTriples numbers pairs
-  let filteredTriples = filter (\(x, y, z) -> x + y + z == 2020) triples
-  print "Matching tripples"
-  let multipliedTriples = map (\(x, y, z) -> x * y * z) filteredTriples
-  print "Max product for triples"
-  print (maximum multipliedTriples)
 
-  hClose handle
+
+
+
 
 -- mapM_ putStrLn args
 
