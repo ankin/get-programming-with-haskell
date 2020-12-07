@@ -80,7 +80,7 @@ validate contents = length (filter validateRule rows)
     rowsToParse = filter (\s -> length s /= 0) (splitOn "\n" contents)
 
 validateRule :: Row -> Bool
-validateRule row =  (minSize validationRule) <= textLength && textLength <= (maxSize validationRule)
+validateRule row = (minSize validationRule) <= textLength && textLength <= (maxSize validationRule)
   where
     matchChar = character (rule row)
     textToEvaluate = text row
@@ -115,3 +115,28 @@ data Rule = Rule
     character :: Char
   }
   deriving (Show)
+
+calculateTreesInFile :: String -> IO ()
+calculateTreesInFile fileName = do
+  fileHandle <- openFile fileName ReadMode
+  contents <- hGetContents fileHandle
+
+  print (calculateTrees contents)
+
+  hClose fileHandle
+
+calculateTrees :: String -> Int
+calculateTrees content = length (treesOnly)
+  where
+    (_ : rows) = toRows content -- start with second row
+    rowsWithIndices = zip rows [3, 6 ..] -- so indices start with 3
+    bitmap = map isTree rowsWithIndices
+    treesOnly = filter (== True) bitmap
+
+toRows :: String -> [String]
+toRows contents = map cycle rows
+  where
+    rows = filter (not . null) (splitOn "\n" contents)
+
+isTree :: (String, Int) -> Bool
+isTree (row, pos) = row !! pos == '#'

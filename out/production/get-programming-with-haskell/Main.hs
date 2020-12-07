@@ -24,7 +24,11 @@ main = do
 --    print reversed
 
 
-  validateFile "/Users/akinash/tmp/aoc/2.txt"
+-- # Advent of Code
+  -- processFile "/Users/akinash/tmp/aoc/2.txt"
+  -- validateFile "/Users/akinash/tmp/aoc/2.txt"
+
+  calculateTheesInFile "/Users/akinash/tmp/aoc/3.txt"
 
 
 

@@ -26,14 +26,9 @@ main = do
 
 -- # Advent of Code
   -- processFile "/Users/akinash/tmp/aoc/2.txt"
-  validateFile "/Users/akinash/tmp/aoc/2.txt"
+  -- validateFile "/Users/akinash/tmp/aoc/2.txt"
 
-
-
-
-
-
-
+  calculateTreesInFile "/Users/akinash/tmp/aoc/3.txt"
 
 
 -- mapM_ putStrLn args

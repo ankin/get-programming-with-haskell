@@ -8,7 +8,7 @@ import Text.Read
 
 processFile :: String -> IO ()
 processFile filePath = do
-  handle <- openFile "/Users/akinash/tmp/aoc/1.txt" ReadMode
+  handle <- openFile filePath ReadMode
   contents <- hGetContents handle
 
   let maybeNumbers = stringToNumbers contents
@@ -74,13 +74,13 @@ validateFile filePath = do
   hClose handle
 
 validate :: String -> Int
-validate contents = length (filter (validateRule) rows)
+validate contents = length (filter validateRule rows)
   where
     rows = map parseRow (rowsToParse)
     rowsToParse = filter (\s -> length s /= 0) (splitOn "\n" contents)
 
 validateRule :: Row -> Bool
-validateRule row =  (minSize validationRule) <= textLength && textLength <= (maxSize validationRule)
+validateRule row = (minSize validationRule) <= textLength && textLength <= (maxSize validationRule)
   where
     matchChar = character (rule row)
     textToEvaluate = text row
@@ -103,28 +103,6 @@ parseRule str = Rule {minSize = minB, maxSize = maxB, character = head (ch !! 0)
     parseBonds [x] = error ("invalid bounds:" ++ show x ++ "in string " ++ str)
     parseBonds [mi, ma] = (mi, ma)
 
-validate2 :: String -> [(String, String, Char, String)]
-validate2 contents = rows
-  where
-    rows = map parseRow2 (rowsToParse)
-    rowsToParse = filter (\s -> length s /= 0) (splitOn "\n" contents)
-
-parseRow2 :: String -> (String, String, Char, String)
-parseRow2 rowStr = (minB, maxB, ch, parsedTextArr !! 0)
-  where
-    (ruleStr : parsedTextArr) = splitOn ": " rowStr
-    (minB, maxB, ch) = parseRule2 ruleStr
-
-parseRule2 :: String -> (String, String, Char)
-parseRule2 str = (minB, maxB, head (ch !! 0))
-  where
-    (boundsStr : ch) = splitOn " " str
-    boundsList = splitOn "-" boundsStr
-    (minB, maxB) = parseBonds boundsList
-    parseBonds [] = error "invalid bounds"
-    parseBonds [x] = error ("invalid bounds:" ++ show x ++ "in string " ++ str)
-    parseBonds [mi, ma] = (mi, ma)
-
 data Row = Row
   { rule :: Rule,
     text :: String
@@ -137,3 +115,38 @@ data Rule = Rule
     character :: Char
   }
   deriving (Show)
+
+
+
+calculateTheesInFile :: String -> IO()
+calculateTheesInFile fileName = do
+  fileHandle <- openFile fileName ReadMode
+  contents <-  hGetContents fileHandle
+
+  print (calculateThees contents)
+
+--  let (_: rows) = toRows contents
+--  let rowsWithIndicies = zip rows [3, 6 ..]
+--  let bitmap = map isTree rowsWithIndicies
+--  print (bitmap)
+
+  hClose fileHandle
+
+
+
+calculateThees :: String -> Int
+calculateThees content = length (treesOnly)
+  where
+    (_: rows) = toRows content
+    rowsWithIndicies = zip rows [3, 6 ..]
+    bitmap = map isTree rowsWithIndicies
+    treesOnly = filter (== True) bitmap
+
+
+toRows :: String -> [String]
+toRows contents = map cycle rows
+  where
+    rows = filter (not. null) (splitOn "\n" contents)
+
+isTree :: (String, Int) -> Bool
+isTree (row, pos)  = row !! pos == '#'
