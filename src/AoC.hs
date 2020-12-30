@@ -116,6 +116,9 @@ data Rule = Rule
   }
   deriving (Show)
 
+
+-- 3
+
 calculateTreesInFile :: String -> IO ()
 calculateTreesInFile fileName = do
   fileHandle <- openFile fileName ReadMode

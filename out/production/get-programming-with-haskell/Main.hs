@@ -5,9 +5,14 @@ import System.Environment
 import Lesson22
 import System.IO
 import AoC
+import qualified Data.Text as T
+import qualified Data.Text.IO as TIO
+
 
 main :: IO ()
 main = do
+  TIO.putStrLn (highlight dharma bgText)
+
 --  args <- getArgs
 --  let linesToRead =
 --        if length args > 0
@@ -28,14 +33,7 @@ main = do
   -- processFile "/Users/akinash/tmp/aoc/2.txt"
   -- validateFile "/Users/akinash/tmp/aoc/2.txt"
 
-  calculateTheesInFile "/Users/akinash/tmp/aoc/3.txt"
-
-
-
-
-
-
-
+  calculateTreesInFile "/Users/akinash/tmp/aoc/3.txt"
 
 
 -- mapM_ putStrLn args

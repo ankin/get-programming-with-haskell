@@ -5,9 +5,14 @@ import System.Environment
 import Lesson22
 import System.IO
 import AoC
+import qualified Data.Text as T
+import qualified Data.Text.IO as TIO
+
 
 main :: IO ()
 main = do
+  TIO.putStrLn (highlight dharma bgText)
+
 --  args <- getArgs
 --  let linesToRead =
 --        if length args > 0

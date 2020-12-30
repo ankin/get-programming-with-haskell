@@ -117,36 +117,29 @@ data Rule = Rule
   deriving (Show)
 
 
+-- 3
 
-calculateTheesInFile :: String -> IO()
-calculateTheesInFile fileName = do
+calculateTreesInFile :: String -> IO ()
+calculateTreesInFile fileName = do
   fileHandle <- openFile fileName ReadMode
-  contents <-  hGetContents fileHandle
+  contents <- hGetContents fileHandle
 
-  print (calculateThees contents)
-
---  let (_: rows) = toRows contents
---  let rowsWithIndicies = zip rows [3, 6 ..]
---  let bitmap = map isTree rowsWithIndicies
---  print (bitmap)
+  print (calculateTrees contents)
 
   hClose fileHandle
 
-
-
-calculateThees :: String -> Int
-calculateThees content = length (treesOnly)
+calculateTrees :: String -> Int
+calculateTrees content = length (treesOnly)
   where
-    (_: rows) = toRows content
-    rowsWithIndicies = zip rows [3, 6 ..]
-    bitmap = map isTree rowsWithIndicies
+    (_ : rows) = toRows content -- start with second row
+    rowsWithIndices = zip rows [3, 6 ..] -- so indices start with 3
+    bitmap = map isTree rowsWithIndices
     treesOnly = filter (== True) bitmap
-
 
 toRows :: String -> [String]
 toRows contents = map cycle rows
   where
-    rows = filter (not. null) (splitOn "\n" contents)
+    rows = filter (not . null) (splitOn "\n" contents)
 
 isTree :: (String, Int) -> Bool
-isTree (row, pos)  = row !! pos == '#'
+isTree (row, pos) = row !! pos == '#'
